@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormularioFC = () => {
+const FormularioFC = (props) => {
     return(
         <div>
             <h1>Soy un Function Component!!!</h1>
