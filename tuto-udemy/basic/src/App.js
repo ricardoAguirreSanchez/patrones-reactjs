@@ -1,23 +1,18 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import Formulario from './componentes/Formulario'
+import FormularioFC from './componentes/FormularioFC'
 
-//dentro del codigo HTML, si usamos variables
-//js van dentro de {}
-class App extends React.Component {
-  render(){
+class App extends React.Component{
 
-    const empleado = {
-      nomre : "juan",
-      edad: 4
+    render(){
+        return(
+            <div>
+                <Formulario></Formulario>
+                <FormularioFC></FormularioFC>
+            </div>
+        )
     }
-
-    return (
-      <div className="App">
-        <h1>Hola {empleado.nomre} de edad {empleado.edad}</h1>
-      </div>
-    );
-  }
-  
 }
 
-export default App;
+
+export default App
