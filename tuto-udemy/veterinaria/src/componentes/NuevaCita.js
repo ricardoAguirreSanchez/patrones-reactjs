@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
 
+const stateInicial = {
+    cita : {
+        mascota:'',
+        propietario:'',
+        fecha:'',
+        hora:'',
+        sintoma:''
+    },
+    total: 500,
+    error : false
+}
+
 class NuevaCita extends Component {
 
     /*TIPS
     1.- usar el atributo name igual q el del state
     2.- usar como nomnbre handler<ETC>
     3.- usar el [] para manejar solo un metodo handlerChange
+    4.- dentro de un tag html las arrow no llevan "{}"
     
     */
     constructor(props) {
         super(props);
 
-        this.state =  {
-            cita : {
-                mascota:'',
-                propietario:'',
-                fecha:'',
-                hora:'',
-                sintoma:''
-            },
-            total: 500,
-            error : false
-        };
+        this.state =  { ...stateInicial};
         
         this.handlerChange = this.handlerChange.bind(this);
         this.handlerSendForm = this.handlerSendForm.bind(this);
     }
 
-    
 
     handlerChange(e){
         this.setState({
@@ -41,24 +43,20 @@ class NuevaCita extends Component {
 
     handlerSendForm(e){
         e.preventDefault();
-       
         const {mascota , sintoma } = this.state.cita;
-        debugger;
-        if (mascota === '' || sintoma === ''){
+        if (mascota === '' || sintoma === ''){//error
             this.setState({
                 error : true
             });
-
-            console.log("con error");
             return
         }
-
         this.props.agregar(this.state.cita)
-        console.log("sin error")
+        this.setState({ ...stateInicial});
         return
     };
 
 
+    //cada vez que cambia el state se ejecuta el render
     render() {
         return (
             <div className="card mt-5 py-5">
@@ -66,7 +64,7 @@ class NuevaCita extends Component {
                     <h2 className="card-tittle md-5 text-center">
                         Llena el formulario
                     </h2>
-
+                    {this.state.error === true? <h2>Campos nombre y sintoma son obligatorios!!!</h2>: null}
                     <form onSubmit={this.handlerSendForm}>
                         <div className="form-group row">
                             <label className="col-sm-4 col-lg-2 col-form-label">

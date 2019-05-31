@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from './componentes/Header'
 import NuevaCita from './componentes/NuevaCita';
+import Listador from './componentes/Listador';
+
 
 class App extends Component {
 
@@ -13,7 +15,6 @@ class App extends Component {
   }
 
   agregarCita(nuevaCita){
-    
     //creo copia de mi state actual
     let stateOld = [...this.state.citas]
     stateOld.push(nuevaCita)
@@ -31,8 +32,10 @@ class App extends Component {
           <div className="col-md-10  mx-auto">
             <NuevaCita agregar={this.agregarCita}></NuevaCita>
           </div>
+          <div className="col-md-10 mt-10  mx-auto">
+            <Listador citas={this.state.citas}></Listador>
+          </div>
         </div>
-        
       </div>
     );
   }
