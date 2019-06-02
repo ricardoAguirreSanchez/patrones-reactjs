@@ -12,6 +12,24 @@ class App extends Component {
       citas : []
     }
     this.agregarCita = this.agregarCita.bind(this);
+    this.borraCita = this.borraCita.bind(this);
+
+  }
+
+  //se ejecuta luego de cargar los componentes
+  componentDidMount(){
+    const citasLS = localStorage.getItem("citas");
+    if (citasLS){
+      this.setState({
+        citas : JSON.parse(citasLS)
+      })
+    }
+    
+  }
+
+  //se ejecuta luego de actualizar el state
+  componentDidUpdate(){
+    localStorage.setItem("citas",JSON.stringify(this.state.citas))
   }
 
   agregarCita(nuevaCita){
@@ -24,6 +42,17 @@ class App extends Component {
     })
   }
 
+  borraCita(id){
+    const citasActuales = [...this.state.citas]
+    const citasFinales = citasActuales.filter((unCita) => {
+      return unCita.id !== id
+    })
+
+    this.setState({
+      citas : citasFinales
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -33,7 +62,7 @@ class App extends Component {
             <NuevaCita agregar={this.agregarCita}></NuevaCita>
           </div>
           <div className="col-md-10 mt-10  mx-auto">
-            <Listador citas={this.state.citas}></Listador>
+            <Listador citas={this.state.citas} borraCita={this.borraCita}></Listador>
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 
 const stateInicial = {
     cita : {
+        id:'',
         mascota:'',
         propietario:'',
         fecha:'',
@@ -50,11 +52,16 @@ class NuevaCita extends Component {
             });
             return
         }
-        this.props.agregar(this.state.cita)
+
+        const citaNueva = {
+            ...this.state.cita,
+            id : uuid()
+        }
+
+        this.props.agregar(citaNueva)
         this.setState({ ...stateInicial});
         return
     };
-
 
     //cada vez que cambia el state se ejecuta el render
     render() {
@@ -64,6 +71,7 @@ class NuevaCita extends Component {
                     <h2 className="card-tittle md-5 text-center">
                         Llena el formulario
                     </h2>
+                    <br/>
                     {this.state.error === true? <h2>Campos nombre y sintoma son obligatorios!!!</h2>: null}
                     <form onSubmit={this.handlerSendForm}>
                         <div className="form-group row">

@@ -1,16 +1,16 @@
 import React from 'react';
+import Cita from './Cita';
 
 const Listador = (props) => {
-    console.log(props.citas)
     return (
-        <div>
-            {/* {(props.citas).map((cita)=>
-                <ul > Mascota: {cita.mascota} - Sintoma: {cita.sintoma}</ul>
-            )} */}
-            {Object.keys(props.citas).map((key) => 
-                <ul key={key}>{props.citas[key].mascota}</ul>
-            )}
+        <div className="card">
+            <div className="card-body">            
+                <h2>Listador</h2>
+                {(props.citas).map((unaCita) => 
+                    <Cita key={unaCita.id} dato={unaCita} borraCita={props.borraCita}></Cita>)}
+            </div>
         </div>
+        
     );
 };
 
